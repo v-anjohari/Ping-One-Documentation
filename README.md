@@ -35,7 +35,7 @@ This solution helps security teams monitor identity infrastructure for suspiciou
 1. Sign into the *PingOne Identity portal*
 2. Go to **Connections > Applications**.
 3. Click **Add Application** and select **Client Credentials**.
-4. Assign the required scope:
+4. Assign the required scopes:
   * `p1:read:audit`(Audit role added via custom roles)
   * Assign **Environment Admin** role from predefined roles.
   * Can add other suitable roles according to your needs,
