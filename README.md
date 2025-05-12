@@ -11,7 +11,7 @@ This solution helps security teams monitor identity infrastructure for suspiciou
 ## **Features**
 
 - Connects to the **PingOne Audit Activities API**.
-- Parses and ingests audit logs into the custom Log Analytics table: `PingOne_AuditActivities_CL`.
+- Parses and ingests audit logs into the custom Log Analytics table: `PingOne_AuditActivitiesV2_CL`.
 - Uses secure **OAuth 2.0 Client Credentials** for authentication.
 - Integrates into Sentinel analytics, hunting queries, and incident detection.
 
@@ -24,44 +24,44 @@ This solution helps security teams monitor identity infrastructure for suspiciou
    - **Client ID**
    - **Client Secret**
    - **Environment ID**
-   - Scope: `p1:read:audit` (Audit role added via custom roles, **Environment Admin** from predefined roles and additional roles like others suitable for your needs)
-   [refer to section below to generate credentials]
-3. Access to an Azure subscription with **Microsoft Sentinel** enabled and permissions to deploy Data Connectors.
-
+   - **APi domain**
+3. Necessary roles are manadatory to generate tokens and view Audit logs.
+4. Access to an Azure subscription with **Microsoft Sentinel** enabled and permissions to deploy Data Connectors.
+   
 ---
 
 ## **Generating PingOne OAuth Client Credentials**
 
 1. Sign into the *PingOne Identity portal*
 2. Go to **Connections > Applications**.
-3. Click **Add Application** and select **Client Credentials**.
-4. Assign the required scopes:
+3. Click **Add Application** and select your preferred app.
+4. Assign the required roles: 
   * `p1:read:audit`(Audit role added via custom roles)
-  * Assign **Environment Admin** role from predefined roles.
+  * Assign **Environment Admin** role from predefined roles. (Needed to generate token)
   * Can add other suitable roles according to your needs,
   * without adding the roles, logs would not be ingested.
-7. Save the following values:
+  
+5. Ensure the token auth method in OIDC settings is  'Client Secret Post'  enabled in configaration section of App.
+6. The grant type in OIDC settings should be 'Client Credentials'
+7. Ensure the application is enabled.
+8. Save the following values:
    - **Client ID**
    - **Client Secret**
    - **Environment ID** (available in the PingOne URL or Environment settings)
+   - **Api domain** ( available in the PingOne URL )
 
 These credentials are required for connector deployment.
 
 ---
-
-## **Deployment Instructions**
-
-Click the button below to deploy the connector using an ARM template:
-
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/YOUR-DEPLOYMENT-URL-HERE)
 
 ### **Deployment Parameters**
 
 - **Client ID**
 - **Client Secret**
 - **Environment ID**
+- **Api domain**
 
-Once deployed, the connector will begin ingesting audit logs from PingOne and send them to the `PingOne_AuditActivities_CL` table in your Sentinel workspace.
+Once deployed, the connector will begin ingesting audit logs from PingOne and send them to the `PingOne_AuditActivitiesV2_CL` table in your Sentinel workspace.
 
 ---
 
