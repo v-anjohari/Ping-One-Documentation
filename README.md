@@ -33,9 +33,9 @@ This solution helps security teams monitor identity infrastructure for suspiciou
 ## **Generating PingOne OAuth Client Credentials**
 
 1. Sign into the *PingOne Identity portal*
-2. Go to **Connections > Applications**.
-3. Click **Add Application** and select your preferred app.
-4. Assign the required roles: 
+2. Go to **Applications > Applications**.
+3. Click **Add Application** and Choose Appliction Type: **Worker**.
+4. Navigate to  **Directory > Administrator Roles > Custom Role** create and assign the required roles: 
   * `p1:read:audit`(Audit role added via custom roles)
   * Assign **Environment Admin** role from predefined roles. (Needed to generate token)
   * Can add other suitable roles according to your needs,
